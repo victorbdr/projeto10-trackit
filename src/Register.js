@@ -1,12 +1,67 @@
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 export default function Register() {
+  const navigate = useNavigate();
+  const [newUser, setNewUser] = useState({
+    email: "",
+    name: "",
+    image: "",
+    password: "",
+  });
+
+  function handleForm(event) {
+    console.log(event);
+    setNewUser({ ...newUser, [event.target.name]: event.target.value });
+  }
+  function sendForm() {
+    console.log("cliquei");
+    const body = {
+      ...newUser,
+    };
+    const promise = axios.post(
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up",
+      body
+    );
+    promise.then((res) => {
+      navigate("/");
+      console.log("deu certo");
+      promise.catch((error) => console.log(error.response));
+    });
+  }
   return (
     <>
-      <form>
+      <form onSubmit={sendForm}>
         <img src={"./imgs/trackit.png"} />
-        <input type="text" placeholder="e-mail" />
-        <input type="password" placeholder="senha" />
-        <input type="name" placeholder="nome" />
-        <input type="photo" placeholder="foto" />
+        <input
+          type="text"
+          placeholder="E-mail"
+          name="email"
+          onChange={handleForm}
+          value={newUser.email}
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          name="password"
+          onChange={handleForm}
+          value={newUser.password}
+        />
+        <input
+          type="text"
+          placeholder="nome"
+          name="name"
+          onChange={handleForm}
+          value={newUser.name}
+        />
+        <input
+          type="photo"
+          placeholder="foto"
+          name="foto"
+          onChange={handleForm}
+          value={newUser.image}
+        />
+        <button type="submit">Cadastrar</button>
       </form>
     </>
   );
