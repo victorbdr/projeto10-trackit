@@ -11,8 +11,10 @@ export default function Register() {
   });
 
   function handleForm(event) {
-    console.log(event);
+    console.log(event.target.name, event.target.value);
     setNewUser({ ...newUser, [event.target.name]: event.target.value });
+    console.log(newUser);
+    event.preventDefault();
   }
   function sendForm() {
     console.log("cliquei");
@@ -31,7 +33,7 @@ export default function Register() {
   }
   return (
     <>
-      <form onSubmit={sendForm}>
+      <form onSubmit={handleForm}>
         <img src={"./imgs/trackit.png"} />
         <input
           type="text"
@@ -57,11 +59,13 @@ export default function Register() {
         <input
           type="photo"
           placeholder="foto"
-          name="foto"
+          name="image"
           onChange={handleForm}
           value={newUser.image}
         />
-        <button type="submit">Cadastrar</button>
+        <button type="submit" onClick={sendForm}>
+          Cadastrar
+        </button>
       </form>
     </>
   );

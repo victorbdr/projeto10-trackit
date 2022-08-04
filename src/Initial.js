@@ -5,6 +5,9 @@ export default function Initial() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  function handleForm(event) {
+    event.preventDefault();
+  }
   function sendForm() {
     const body = { email, password };
     const promise = axios.post(
@@ -18,7 +21,7 @@ export default function Initial() {
   }
   return (
     <>
-      <form on>
+      <form onSubmit={handleForm}>
         <img src={"./imgs/trackit.png"} alt="logo" />
         <input
           type="text"
