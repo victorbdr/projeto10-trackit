@@ -6,15 +6,17 @@ import Habits from "./Habits";
 import History from "./History";
 import Today from "./Today";
 import Register from "./Register";
+import GlobalStyle from "./globalStyles";
 import { useState } from "react";
 export default function App() {
   const [token, setToken] = useState([]);
   const [image, setImage] = useState([]);
-  const [percentage, setPercentage] = useState([]);
+  const [circle, setCircle] = useState([]);
   return (
     <UserContext.Provider
-      value={{ token, setToken, setImage, image, percentage, setPercentage }}
+      value={{ token, setToken, setImage, image, circle, setCircle }}
     >
+      <GlobalStyle />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Initial />}></Route>

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import styled from "styled-components";
 export default function Register() {
   const navigate = useNavigate();
   const [newUser, setNewUser] = useState({
@@ -33,31 +34,31 @@ export default function Register() {
   }
   return (
     <>
-      <form onSubmit={handleForm}>
+      <Form onSubmit={handleForm}>
         <img src={"./imgs/trackit.png"} />
-        <input
+        <Input
           type="text"
           placeholder="E-mail"
           name="email"
           onChange={handleForm}
           value={newUser.email}
         />
-        <input
+        <Input
           type="password"
           placeholder="Senha"
           name="password"
           onChange={handleForm}
           value={newUser.password}
         />
-        <input
+        <Input
           type="text"
           placeholder="nome"
           name="name"
           onChange={handleForm}
           value={newUser.name}
         />
-        <input
-          type="photo"
+        <Input
+          type="url"
           placeholder="foto"
           name="image"
           onChange={handleForm}
@@ -66,7 +67,33 @@ export default function Register() {
         <button type="submit" onClick={sendForm}>
           Cadastrar
         </button>
-      </form>
+        <Link to="/">
+          <p> Já tem uma conta? Faça login!</p>
+        </Link>
+      </Form>
     </>
   );
 }
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 303px;
+    height: 45px;
+    background: #52b6ff;
+    border-radius: 4.63636px;
+  }
+`;
+const Input = styled.input`
+  width: 303px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid #d5d5d5;
+  border-radius: 5px;
+`;
