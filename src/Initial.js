@@ -1,7 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useContext } from "react";
+import UserContext from "./contexts/UserContext";
 export default function Initial() {
+  const { token, setToken } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -15,6 +18,7 @@ export default function Initial() {
       body
     );
     promise.then((res) => {
+      setToken(res.data.token);
       console.log(res.data);
       navigate("/habits");
     });
